@@ -87,14 +87,14 @@ function playAgain(){
   guessInput.removeAttribute('disabled');
 
   // alternativly
-  window.location.reload();
+  // window.location.reload();
 }
 
 function setGuessAndRange(){
   min_span.innerHTML = min = 1;
   max_span.innerHTML = max = 10;
 
-  randomNumber = Math.floor(Math.random() * 10) + 1;
+  randomNumber = Math.floor(Math.random() * (max-min+1)+min);
 
 }
 
