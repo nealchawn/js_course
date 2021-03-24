@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
 
     <title>Loan Calculator</title>
+
+    <style>
+      #loading, #results{
+        display: none;
+      }
+    </style>
   </head>
   <body class="bg-dark">
     <div class="container">
@@ -37,11 +43,9 @@
               </div>
             </form>
             <!-- LOADER HERE -->
-            <!--
-            <div id="loading">
+            <div id="loading" class="pt-4">
               <img src="./img/spinner.gif" alt="">
             </div>
-            -->
             <!-- RESULTS -->
             <div id="results" class="pt-4">
               <h5>Results</h5>
