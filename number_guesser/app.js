@@ -20,6 +20,11 @@ let randomNumber, min, max;
 
 setGuessAndRange();
 
+/*
+Because of hoisting functions are hoisted to the top,
+thus they are defined and able to be called from anywhere.
+*/
+
 submitBtn.addEventListener('click', gameController);
 
 function gameController(e){
@@ -80,6 +85,9 @@ function playAgain(){
   setGuessAndRange();
   // re-enable dom
   guessInput.removeAttribute('disabled');
+
+  // alternativly
+  window.location.reload();
 }
 
 function setGuessAndRange(){
