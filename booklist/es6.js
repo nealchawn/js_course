@@ -61,7 +61,7 @@ class UI{
     this.container = document.querySelector('.container');
     this.form = document.getElementById('book-form');
     this.bookTable = document.getElementById('book-list');
-    this.bookList = [];
+    this.bookList = []; // rendered superfluous with localStorage
 
     this.title = document.getElementById('title');
     this.author = document.getElementById('author');
@@ -69,11 +69,23 @@ class UI{
   }
 
   addToBookList(book){
-    this.bookList.push(book);  
+    //this.bookList.push(book);
+
+    // add to localstorage
+    let bookList;
+    if(localStorage.getItem('bookList') == null){
+      bookList = [];
+    }else{
+      bookList = JSON.parse(localStorage.getItem('bookList'));
+    }
+    bookList.push(book);
+    localStorage.setItem('bookList', JSON.stringify(bookList));
+    this.bookList = bookList;
   }
 
   renderBookList(){
     this.bookTable.innerHTML = "";
+    this.bookList = JSON.parse(localStorage.getItem('bookList'));
     this.bookList.forEach((book)=>{
       let tr = document.createElement('tr');
       tr.innerHTML = `
@@ -131,16 +143,26 @@ class UI{
     let isbn = bookRow.children[2].innerText;
   
     // remove bookFrom list
-    let copy_bookList = this.bookList;
+    //let copy_bookList = this.bookList;
+    let copy_bookList;
+    let bookList;
+    // get from localStorage
+    bookList = JSON.parse(localStorage.getItem('bookList'));
+    console.log(bookList)
+    copy_bookList = bookList;
     copy_bookList.forEach((book, index)=>{
-      console.log(this.bookList[index])
+      console.log(bookList[index])
       console.log(new Book(title, author, isbn));
-      if(this.bookList[index].equalsTo(new Book(title, author, isbn))){
-        this.bookList.splice(index,1);
+      if(Book.equalsTo( bookList[index], (new Book(title, author, isbn)))){
+        bookList.splice(index,1);
         // or delete row here
         //bookRow.parentElement.removeChild(bookRow);
       }
     });
+
+    // remove from localstorage
+    localStorage.setItem('bookList', JSON.stringify(bookList));
+    this.bookList = bookList;
     
     // re-render dom
     ui.renderBookList();
