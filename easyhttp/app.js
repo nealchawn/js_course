@@ -1,7 +1,7 @@
 
 let http;
 http = new easyHTTP();
-if(0){
+if(1){
 http.get("http://jsonplaceholder.typicode.com/posts", function(error, response){
   if(error){
     console.log(error);
@@ -51,7 +51,7 @@ if(0){
   });
 }
 
-if(1){
+if(0){
   http.delete("http://jsonplaceholder.typicode.com/posts/2", function(error, response){
     if(error){
       console.log(error);
