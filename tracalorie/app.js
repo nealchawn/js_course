@@ -57,6 +57,9 @@ const ItemCtrl = (function(){
         return data.items.splice(arrayIndex,1);
       }
     },
+    deleteAllItems: function(){
+      data.items = [];
+    },
     getTotalCalories: function(){return computeTotalCalories();},
     updateItem: function(name, calories){
       let arrayIndex = itemIndex(data.currentItem);
@@ -113,6 +116,7 @@ const UICtrl = (function(){
     add_item_btn: document.querySelector('.add-btn'),
     update_item_btn: document.querySelector('.update-btn'),
     delete_item_btn: document.querySelector('.delete-btn'),
+    clear_item_btn: document.querySelector('.clear-btn'),
     back_item_btn: document.querySelector('.back-btn'),
     item_name_input: document.querySelector('#item-name'),
     item_calories_input: document.querySelector('#item-calories')
@@ -187,6 +191,11 @@ const App = (function(ItemCtrl, UICtrl){
     });
     UISelectors.back_item_btn.addEventListener('click', (e)=>{
       e.preventDefault();
+      refreshUI();
+    });
+    UISelectors.clear_item_btn.addEventListener('click', function(e){
+      e.preventDefault();
+      ItemCtrl.deleteAllItems();
       refreshUI();
     });
   }
